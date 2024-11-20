@@ -5,8 +5,8 @@ export const example = new Elysia()
     .get("/", () => "Hello Elysia", {
         detail: {
             tags: ["Example"],
-            summary: "get hello",
-            description: "tanandol"
+            summary: "get/Hello",
+            description: "Wowwww"
         }
     })
     .post("/about", ({ body }) => {
