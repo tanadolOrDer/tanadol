@@ -1,6 +1,6 @@
 import Elysia, { Static, t } from "elysia"
 import { _register } from "./register.types"
-import { _paginator, createPagination } from "./pagination.type"
+import { _paginator, createPagination as CreatePagination } from "./pagination.type"
 
 
 export const _profile = t.Object({
@@ -9,9 +9,9 @@ export const _profile = t.Object({
     introduction: t.Optional(t.String()),
     interest: t.Optional(t.String()),
     age: t.Optional(t.String()),
-    last_active: t.Optional(t.String()),
-    created_at: t.Optional(t.String()),
-    updated_at: t.Optional(t.String()),
+    last_active: t.Optional(t.Date()),
+    created_at: t.Optional(t.Date()),
+    updated_at: t.Optional(t.Date()),
     location: t.Optional(t.String())
     //todo: implement uplond feature
 
@@ -29,11 +29,12 @@ const _userPagination = t.Object({
     mix_age: t.Optional(t.Number()),
     max_age: t.Optional(t.Number()),
     looking_for: t.Optional(t.Union([t.Literal('male'), t.Literal('famal'), t.Literal('all')])),
+    gender: t.Optional(t.Number()),
 })
 export const _updateProfile = t.Omit(_profile, ['id', 'username', 'created_at', 'last_active'])
-export const _userPaginator = createPagination(_user, _userPagination)
+export const _userPaginator = CreatePagination(_user, _userPagination)
 export const UserDto = new Elysia().model({
-    paginator: t.Optional(_userPagination),
+    pagination: t.Optional(_userPagination),
     _updateProfile: _updateProfile,
     users: _userPaginator,
     user: _user
