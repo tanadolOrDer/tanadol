@@ -1,5 +1,5 @@
 import { Elysia, t } from "elysia"
-import { example } from "./controllers/example.controllers"
+
 import { swaggerConfig } from "./config/swagger.config"
 import { tlsConfig } from "./config/tls.config"
 import cors from "@elysiajs/cors"
@@ -18,7 +18,10 @@ const app = new Elysia()
   .use(UserController)
   //.use(example)
   .use(cors())
-  .use(staticPlugin())
+  .use(staticPlugin({
+    assets:"public/uploads",
+    prefix:"img"
+  }))
   .listen({
     port: Bun.env.PORT || 8000,
     tls: tlsConfig

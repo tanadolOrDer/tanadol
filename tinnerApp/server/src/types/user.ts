@@ -1,6 +1,6 @@
 import Elysia, { Static, t } from "elysia"
 import { _register } from "./register.types"
-import { _paginator, createPagination as CreatePagination } from "./pagination.type"
+import { _pagination, CreatePagination as CreatePagination } from "./pagination.type"
 
 
 export const _profile = t.Object({
@@ -24,18 +24,18 @@ export const _user = t.Object({
     //followers: profile[]
 })
 const _userPagination = t.Object({
-    ..._paginator.properties,
+    ..._pagination.properties,
     username: t.Optional(t.String()),
     mix_age: t.Optional(t.Number()),
     max_age: t.Optional(t.Number()),
     looking_for: t.Optional(t.Union([t.Literal('male'), t.Literal('famal'), t.Literal('all')])),
-    gender: t.Optional(t.Number()),
+    gender: t.Optional(t.Union([t.Literal('male'), t.Literal('famal'), t.Literal('all')])),
 })
-export const _updateProfile = t.Omit(_profile, ['id', 'username', 'created_at', 'last_active'])
+export const _updateProfile = t.Omit(_profile, ['id', 'username', 'created_at', 'last_active','age'])
 export const _userPaginator = CreatePagination(_user, _userPagination)
 export const UserDto = new Elysia().model({
     pagination: t.Optional(_userPagination),
-    _updateProfile: _updateProfile,
+ updateProfile: _updateProfile,
     users: _userPaginator,
     user: _user
 })

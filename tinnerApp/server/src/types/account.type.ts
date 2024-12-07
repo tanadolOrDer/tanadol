@@ -1,4 +1,4 @@
-import { password } from "bun"
+
 import Elysia, { Static, t } from "elysia"
 import { _user } from "./user"
 import { _register } from "./register.types"

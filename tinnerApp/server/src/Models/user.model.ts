@@ -6,8 +6,8 @@ import { calculateAge } from "../Helpper/date.helpper"
 import { user } from "../types/user"
 
 const schema = new mongoose.Schema<IUserDocument, IUserModel>({
-    // username: { type: String, required: true, unique: true },
-    username: { type: String },
+     username: { type: String, required: true, unique: true },
+    //username: { type: String },
     password_hash: { type: String, required: true },
     display_name: { type: String },
     dete_of_birth: { type: Date },
@@ -80,7 +80,7 @@ schema.methods.verifyPassword = async function (password: string): Promise<boole
 
 }
 schema.statics.createUser = async function (registerData: register): Promise<IUserDocument> {
-    const newUser = new this({
+    const newUser =await new this({
         display_name: registerData.display_name,
         username: registerData.username,
         password_hash: await Bun.password.hash(registerData.password),

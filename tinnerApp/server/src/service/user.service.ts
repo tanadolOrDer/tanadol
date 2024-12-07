@@ -3,7 +3,6 @@ import { _updateProfile, _userPagination, _userPaginator, user } from "../types/
 import { IUserDocument } from "../interfaces/user.interface"
 import { QueryHelper } from "../Helpper/query.helper"
 import { User } from "../Models/user.model"
-import { $ } from "bun"
 
 export const UserService = {
     get: async function (pagination: _userPagination, user_id: string): Promise<_userPaginator> {

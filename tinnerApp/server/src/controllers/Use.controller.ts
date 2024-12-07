@@ -2,8 +2,8 @@ import Elysia from "elysia"
 import { UserService } from "../service/user.service"
 import { Authmiddleware, authPayload } from "../middleware/auts.middleware"
 import { UserDto } from "../types/user"
-import { AccountService } from "../service/account.service"
-import { set } from "mongoose"
+
+
 
 export const UserController = new Elysia({
     prefix: "/api/user",
@@ -31,7 +31,7 @@ export const UserController = new Elysia({
     })
     .patch('/', async ({ body, set, Auth }) => {
         try {
-            const user_id = await (Auth.payload as authPayload).id
+            const user_id =  (Auth.payload as authPayload).id
             await UserService.updateProfile(body, user_id)
             set.status = "No Content"
         } catch (error) {
@@ -44,6 +44,6 @@ export const UserController = new Elysia({
     }, {
         detail: { summary: "Update Profile" },
         body: "updateProfile",
-        response: "user",
+        //response: "user",
         isSignIn: true
     }) 

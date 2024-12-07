@@ -6,7 +6,7 @@ export const example = new Elysia()
         detail: {
             tags: ["Example"],
             summary: "get/Hello",
-            description: "Wowwww"
+            description: "Bra bra"
         }
     })
     .post("/about", ({ body }) => {
@@ -20,6 +20,6 @@ export const example = new Elysia()
         }), detail: {
             tags: ["Example"],
             summary: "abput",
-            description: "tanandol"
+            description: "Numbertwo"
         }
     })
